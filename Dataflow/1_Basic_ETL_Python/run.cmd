@@ -36,7 +36,7 @@ python3 my_pipeline.py \
   --tempLocation=gs://$PROJECT_ID/temp/ \
   --runner=DirectRunner
 
-# 9) Run the pipeline on Dataflow
+// 9) Run the pipeline on Dataflow
 
 # Set up environment variables
 cd $BASE_DIR
@@ -49,3 +49,28 @@ python3 my_pipeline.py \
   --stagingLocation=gs://$PROJECT_ID/staging/ \
   --tempLocation=gs://$PROJECT_ID/temp/ \
   --runner=DataflowRunner
+
+
+
+################ Part 2: Parameterizing basic ETL ####################
+
+// 1) Create a JSON schema file & copy this file to Cloud Storage
+bq show --schema --format=prettyjson logs.logs | sed '1s/^/{"BigQuery Schema":/' | sed '$s/$/}/' > schema.json
+
+cat schema.json
+
+export PROJECT_ID=$(gcloud config get-value project)
+gcloud storage cp schema.json gs://${PROJECT_ID}/
+
+// 2) Create a JavaScript user-defined function & copy it to Cloud Storage
+cat <<EOF > transform.js
+function transform(line) {
+  return line;
+}
+EOF
+
+export PROJECT_ID=$(gcloud config get-value project)
+gcloud storage cp *.js gs://${PROJECT_ID}/
+
+
+// 3) Run a Dataflow Template (manually in Google Cloud Console)
