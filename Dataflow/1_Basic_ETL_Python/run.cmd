@@ -21,3 +21,31 @@ bash generate_batch_events.sh
 head events.json
 
 // 6) modify 'my_pipeline.py' file with final code
+
+// 7) Run the pipeline localy to verify that it works
+cd $BASE_DIR
+
+# Set up environment variables
+export PROJECT_ID=$(gcloud config get-value project)
+
+# run the pipeline
+python3 my_pipeline.py \
+  --project=${PROJECT_ID} \
+  --region=us-central1 \
+  --stagingLocation=gs://$PROJECT_ID/staging/ \
+  --tempLocation=gs://$PROJECT_ID/temp/ \
+  --runner=DirectRunner
+
+# 9) Run the pipeline on Dataflow
+
+# Set up environment variables
+cd $BASE_DIR
+export PROJECT_ID=$(gcloud config get-value project)
+
+# Run the pipelines
+python3 my_pipeline.py \
+  --project=${PROJECT_ID} \
+  --region=us-central1 \
+  --stagingLocation=gs://$PROJECT_ID/staging/ \
+  --tempLocation=gs://$PROJECT_ID/temp/ \
+  --runner=DataflowRunner
