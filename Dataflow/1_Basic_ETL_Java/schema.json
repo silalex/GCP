@@ -1,0 +1,47 @@
+{"BigQuery Schema":[
+  {
+    "mode": "REQUIRED",
+    "name": "user_id",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "ip",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "lat",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "lng",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "timestamp",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "http_request",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "user_agent",
+    "type": "STRING"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "http_response",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "num_bytes",
+    "type": "INTEGER"
+  }
+]}
