@@ -20,4 +20,4 @@ source create_batch_sinks.sh
 bash generate_batch_events.sh
 head events.json
 
-// 6)
+// 6) modify 'my_pipeline.py' file with final code

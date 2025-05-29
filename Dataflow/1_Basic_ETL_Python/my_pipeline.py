@@ -1,15 +1,18 @@
-# TODO: Add imports
-
-# ### functions and classes
-
-# TODO: Add parse_json function
+import argparse
+import time
+import logging
+import json
+import apache_beam as beam
+from apache_beam.options.pipeline_options import GoogleCloudOptions
+from apache_beam.options.pipeline_options import PipelineOptions
+from apache_beam.options.pipeline_options import StandardOptions
+from apache_beam.runners import DataflowRunner, DirectRunner
 
 # ### main
 
 def run():
-
     # Command line arguments
-    parser = argparse.ArgumentParser(description='Convert Json into BigQuery using Schemas')
+    parser = argparse.ArgumentParser(description='Load from Json into BigQuery')
     parser.add_argument('--project',required=True, help='Specify Google Cloud project')
     parser.add_argument('--region', required=True, help='Specify Google Cloud region')
     parser.add_argument('--stagingLocation', required=True, help='Specify Cloud Storage bucket for staging')
@@ -27,10 +30,51 @@ def run():
     options.view_as(GoogleCloudOptions).job_name = '{0}{1}'.format('my-pipeline-',time.time_ns())
     options.view_as(StandardOptions).runner = opts.runner
 
-    # TODO: Add static input and output strings
+    # Static input and output
+    input = 'gs://{0}/events.json'.format(opts.project)
+    output = '{0}:logs.logs'.format(opts.project)
 
     # Table schema for BigQuery
-    table_schema = # TODO: Add table schema
+    table_schema = {
+        "fields": [
+            {
+                "name": "ip",
+                "type": "STRING"
+            },
+            {
+                "name": "user_id",
+                "type": "STRING"
+            },
+            {
+                "name": "lat",
+                "type": "FLOAT"
+            },
+            {
+                "name": "lng",
+                "type": "FLOAT"
+            },
+            {
+                "name": "timestamp",
+                "type": "STRING"
+            },
+            {
+                "name": "http_request",
+                "type": "STRING"
+            },
+            {
+                "name": "http_response",
+                "type": "INTEGER"
+            },
+            {
+                "name": "num_bytes",
+                "type": "INTEGER"
+            },
+            {
+                "name": "user_agent",
+                "type": "STRING"
+            }
+        ]
+    }
 
     # Create the pipeline
     p = beam.Pipeline(options=options)
@@ -44,7 +88,16 @@ def run():
 
     '''
 
-    # TODO: Add transformation steps to pipeline
+    (p
+        | 'ReadFromGCS' >> beam.io.ReadFromText(input)
+        | 'ParseJson' >> beam.Map(lambda line: json.loads(line))
+        | 'WriteToBQ' >> beam.io.WriteToBigQuery(
+            output,
+            schema=table_schema,
+            create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
+            write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE
+            )
+    )
 
     logging.getLogger().setLevel(logging.INFO)
     logging.info("Building pipeline ...")
