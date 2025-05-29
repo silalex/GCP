@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Google Inc.
+ * Copyright (C) 2018 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,19 @@
 
 package com.mypackage.pipeline;
 
-//TODO: Add imports
+import com.google.gson.Gson;
+import org.apache.beam.runners.dataflow.options.DataflowPipelineOptions;
+import org.apache.beam.sdk.Pipeline;
+import org.apache.beam.sdk.PipelineResult;
+import org.apache.beam.sdk.io.TextIO;
+import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
+import org.apache.beam.sdk.options.PipelineOptionsFactory;
+import org.apache.beam.sdk.schemas.JavaFieldSchema;
+import org.apache.beam.sdk.schemas.annotations.DefaultSchema;
+import org.apache.beam.sdk.transforms.DoFn;
+import org.apache.beam.sdk.transforms.ParDo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class MyPipeline {
@@ -48,10 +60,35 @@ public class MyPipeline {
         run(options);
     }
 
-    //TODO: Add CommonLog Class
+    /**
+     * A class used for parsing JSON web server events
+     * Annotated with @DefaultSchema to the allow the use of Beam Schemas and <Row> object
+     */
+    @DefaultSchema(JavaFieldSchema.class)
+    public static class CommonLog {
+        String user_id;
+        String ip;
+        Double lat;
+        Double lng;
+        String timestamp;
+        String http_request;
+        String user_agent;
+        Long http_response;
+        Long num_bytes;
+    }
 
-    //TODO: Add JsonToCommonLog DoFn
+    /**
+     * A DoFn acccepting Json and outputing CommonLog with Beam Schema
+     */
+    static class JsonToCommonLog extends DoFn<String, CommonLog> {
 
+        @ProcessElement
+        public void processElement(@Element String json, OutputReceiver<CommonLog> r) throws Exception {
+            Gson gson = new Gson();
+            CommonLog commonLog = gson.fromJson(json, CommonLog.class);
+            r.output(commonLog);
+        }
+    }
 
     /**
      * Runs the pipeline to completion with the specified options. This method does
@@ -68,8 +105,10 @@ public class MyPipeline {
         Pipeline pipeline = Pipeline.create(options);
         options.setJobName("my-pipeline-" + System.currentTimeMillis());
 
-        //TODO: Add static input and output strings
 
+        // Static input and output
+        String input = "gs://qwiklabs-gcp-02-789d5bd9eed4/events.json";
+        String output = "qwiklabs-gcp-02-789d5bd9eed4:logs.logs";
 
         /*
          * Steps:
@@ -78,8 +117,12 @@ public class MyPipeline {
          * 3) Write something
          */
 
-        //TODO: Add pipeline.apply() and other steps
-
+        pipeline.apply("ReadFromGCS", TextIO.read().from(input))
+                .apply("ParseJson", ParDo.of(new JsonToCommonLog()))
+                .apply("WriteToBQ",
+                        BigQueryIO.<CommonLog>write().to(output).useBeamSchema()
+                                .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_TRUNCATE)
+                                .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED));
         LOG.info("Building pipeline...");
 
         return pipeline.run();
