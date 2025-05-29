@@ -1,0 +1,3 @@
+### The  final cmd to run the Dataflow job
+# gcloud config set project qwiklabs-gcp-02-789d5bd9eed4
+gcloud dataflow jobs run dataflow-job-from-template --gcs-location gs://dataflow-templates-us-west1/latest/GCS_Text_to_BigQuery --region us-west1 --staging-location gs://qwiklabs-gcp-02-789d5bd9eed4/temp-new-2/ --parameters inputFilePattern=gs://qwiklabs-gcp-02-789d5bd9eed4/events.json,JSONPath=gs://qwiklabs-gcp-02-789d5bd9eed4/schema.json,outputTable=qwiklabs-gcp-02-789d5bd9eed4:logs.logs,bigQueryLoadingTemporaryDirectory=gs://qwiklabs-gcp-02-789d5bd9eed4/temp-new/,javascriptTextTransformGcsPath=gs://qwiklabs-gcp-02-789d5bd9eed4/transform.js
