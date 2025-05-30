@@ -118,10 +118,37 @@ public class BatchMinuteTrafficPipeline {
          * 3) Write something
          */
 
-        pipeline.apply("ReadFromGCS", TextIO.read().from(options.getInputPath()))
+        pipeline
+                // Read in lines from GCS and Parse to CommonLog
+                .apply("ReadFromGCS", TextIO.read().from(options.getInputPath()))
                 .apply("ParseJson", ParDo.of(new JsonToCommonLog()))
+
+                // Add timestamp based on the timestamp field
+                .apply("AddEventTimestamps", WithTimestamps.of(
+                        (CommonLog commonLog) -> Instant.parse(commonLog.timestamp)))
+
+                // Window by Minute
+                .apply("WindowByMinute", Window.into(FixedWindows.of(Duration.standardSeconds(60))))
+
+                // update to Group.globally() after resolved: https://issues.apache.org/jira/browse/BEAM-10297
+                // Only if supports Row output
+                .apply("CountPerMinute", Combine.globally(Count.<CommonLog>combineFn()).withoutDefaults())
+
+                // Capture the window end timestamp, need to use new schema
+                .apply("AddWindowTimestamp", ParDo.of(new DoFn<Long, Row>() {
+                    @ProcessElement
+                    public void processElement(@Element Long pageviews, OutputReceiver<Row> r, IntervalWindow window) {
+                        Instant i = Instant.ofEpochMilli(window.start().getMillis());
+                        Row timestampedRow = Row.withSchema(pageViewsSchema)
+                                .addValues(pageviews, i)
+                                .build();
+                        r.output(timestampedRow);
+                    }
+                })).setRowSchema(pageViewsSchema)
+
+                // Write out results to BigQuery
                 .apply("WriteToBQ",
-                        BigQueryIO.<CommonLog>write().to(options.getTableName()).useBeamSchema()
+                        BigQueryIO.<Row>write().to(options.getTableName()).useBeamSchema()
                                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_TRUNCATE)
                                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED));
 
