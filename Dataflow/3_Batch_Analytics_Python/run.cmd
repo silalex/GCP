@@ -1,6 +1,11 @@
+##################################################################################
+#####################  Part 1. Aggregating site traffic by user  #################
+##################################################################################
+
 // 1) Clone Github repo
 git clone https://github.com/GoogleCloudPlatform/training-data-analyst
 cd /home/jupyter/training-data-analyst/quests/dataflow_python/
+
 
 // 2) Setting up virtual environment and dependencies
 sudo apt-get update && sudo apt-get install -y python3-venv
@@ -29,7 +34,6 @@ source generate_batch_events.sh
 cd $BASE_DIR
 
 
-
 // 4) modify "original" Python code according to the task requirements & run the pipeline
 
 export PROJECT_ID=$(gcloud config get-value project)
@@ -49,3 +53,11 @@ python3 batch_user_traffic_pipeline.py \
 --runner=${RUNNER} \
 --input_path=${INPUT_PATH} \
 --table_name=${TABLE_NAME}
+
+
+
+##################################################################################
+##################### Part 2. Aggregating site traffic by minute #################
+##################################################################################
+
+// 1) 
