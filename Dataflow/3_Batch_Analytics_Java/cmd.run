@@ -48,3 +48,8 @@ mvn compile exec:java \
 
 
 
+####################################################################
+############ Part 2: Aggregating site traffic by minute ############
+####################################################################
+
+// 1) add "origina" Java-code attached in the Task description
