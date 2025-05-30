@@ -16,3 +16,15 @@ python3 -m pip install apache-beam[gcp]
 # Ensure that the Dataflow API is enabled:
 gcloud services enable dataflow.googleapis.com
 
+
+// 3) Set up the data environment
+# Create GCS buckets and BQ dataset
+cd $BASE_DIR/../..
+source create_batch_sinks.sh
+
+# Generate event dataflow
+source generate_batch_events.sh
+
+# Change to the directory containing the practice version of the code
+cd $BASE_DIR
+
