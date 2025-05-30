@@ -24,10 +24,14 @@ class CommonLog (typing.NamedTuple):
     user_agent: str
 
 class PerUserAggregation(typing.NamedTuple):
-    # TODO: Finish defining class for schema
+    user_id: str
+    page_views: int
+    total_bytes: int
+    max_bytes: int
+    min_bytes: int
 
 beam.coders.registry.register_coder(CommonLog, beam.coders.RowCoder)
-# TODO: Register coder for PerUserAggregation
+beam.coders.registry.register_coder(PerUserAggregation, beam.coders.RowCoder)
 
 def parse_json(element):
     row = json.loads(element)
@@ -98,7 +102,12 @@ def run():
 
     (p | 'ReadFromGCS' >> beam.io.ReadFromText(input_path)
        | 'ParseJson' >> beam.Map(parse_json).with_output_types(CommonLog)
-       | 'PerUserAggregations' >> # TODO: Perform aggregations
+       | 'PerUserAggregations' >> beam.GroupBy('user_id')
+                                      .aggregate_field('user_id', CountCombineFn(), 'page_views')
+                                      .aggregate_field('num_bytes', sum, 'total_bytes')
+                                      .aggregate_field('num_bytes', max, 'max_bytes')
+                                      .aggregate_field('num_bytes', min, 'min_bytes')
+                                      .with_output_types(PerUserAggregation)
        | 'ToDict' >> beam.Map(to_dict)
        | 'WriteToBQ' >> beam.io.WriteToBigQuery(
             table_name,
