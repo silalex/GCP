@@ -30,7 +30,7 @@ cd $BASE_DIR
 
 
 
-// 4) modify "origina" Python code according to the task requirements & run the pipeline
+// 4) modify "original" Python code according to the task requirements & run the pipeline
 
 export PROJECT_ID=$(gcloud config get-value project)
 export REGION=us-west1
