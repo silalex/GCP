@@ -140,7 +140,7 @@ def run():
 
 
 
-    parsed_msgs = (p | 'ReadFromPubSub' >> #TODO: Use ReadFromPubSub to read in messages
+    parsed_msgs = (p | 'ReadFromPubSub' >> beam.io.ReadFromPubSub(input_topic)
                      | 'ParseJson' >> beam.Map(parse_json).with_output_types(CommonLog))
 
     (parsed_msgs
@@ -154,10 +154,15 @@ def run():
         )
 
     (parsed_msgs
-        | "WindowByMinute" >> # TODO: Window into 1 minute long windows
-        | "CountPerMinute" >> # TODO: Count number of messages per window.
+        | "WindowByMinute" >> beam.WindowInto(beam.window.FixedWindows(60))
+        | "CountPerMinute" >> beam.CombineGlobally(CountCombineFn()).without_defaults()
         | "AddWindowTimestamp" >> beam.ParDo(GetTimestampFn())
-        | 'WriteAggToBQ' >> # TODO: Write aggregated data to BigQuery table
+        | 'WriteAggToBQ' >> beam.io.WriteToBigQuery(
+            agg_table_name,
+            schema=agg_table_schema,
+            create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
+            write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND
+            )
     )
 
     logging.getLogger().setLevel(logging.INFO)
