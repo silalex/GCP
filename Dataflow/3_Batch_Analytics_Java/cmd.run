@@ -1,0 +1,23 @@
+####################################################################
+############# Part 1: Aggregating site traffic by user #############
+####################################################################
+
+// 1) Download dependencies
+# Change directory into the lab
+cd 3_Batch_Analytics/labs
+
+# Download dependencies
+mvn clean dependency:resolve
+export BASE_DIR=$(pwd)
+
+
+// 2) generate a source dataset
+# Create GCS buckets and BQ dataset
+cd $BASE_DIR/../..
+source create_batch_sinks.sh
+
+# Generate event dataflow
+source generate_batch_events.sh
+
+# Change to the directory containing the practice version of the code
+cd $BASE_DIR
