@@ -8,6 +8,7 @@ Topics/Folders:
   - 2_Branching_Pipelines: Serverless Data Processing with Dataflow - Branching Pipelines (Python)
   - 3_Batch_Analytics_Python: Serverless Data Processing with Dataflow - Batch Analytics Pipelines with Dataflow (windowing features w/ Python)
   - 5_Streaming_Analytics_Python: Serverless Data Processing with Dataflow - Using Dataflow for Streaming Analytics (Python)
+  - 7_Advanced_Streaming_Analytics: Serverless Data Processing with Dataflow - Advanced Streaming Analytics Pipeline with Dataflow (Python)
 
   2. Arch_Java_Code: all JAVA code archived
 
