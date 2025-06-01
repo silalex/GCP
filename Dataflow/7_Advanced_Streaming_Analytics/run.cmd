@@ -17,3 +17,11 @@ python3 -m pip install apache-beam[gcp]
 gcloud services enable dataflow.googleapis.com
 
 
+// 5) Set up the data environment & source dataset generation:
+# Create GCS buckets and BQ dataset
+cd $BASE_DIR/../../
+source create_streaming_sinks.sh
+
+# Change to the directory containing the practice version of the code
+cd $BASE_DIR
+
