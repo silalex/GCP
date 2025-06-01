@@ -33,10 +33,9 @@ class ConvertToCommonLogFn(beam.DoFn):
   def process(self, element):
     try:
         row = json.loads(element.decode('utf-8'))
-        yield #TODO: TaggedOutput with tag 'parsed_row' and output CommonLog
+        yield beam.pvalue.TaggedOutput('parsed_row', CommonLog(**row))
     except:
-        element = element.decode('utf-8')
-        yield #TODO: TaggedOutput with tag 'unparsed_row' and output CommonLog
+        yield beam.pvalue.TaggedOutput('unparsed_row', element.decode('utf-8'))
 
 
 class GetTimestampFn(beam.DoFn):
@@ -110,14 +109,18 @@ def run():
 
     (rows.unparsed_row
         | 'BatchOver10s' >> beam.WindowInto(beam.window.FixedWindows(120),
-                                            #TODO: Set trigger and accumulaton mode)
-        | 'WriteUnparsedToGCS' >># TODO: Use fileio.WriteToFiles to write out to GCS
+                                            trigger=AfterProcessingTime(120),
+                                            accumulation_mode=AccumulationMode.DISCARDING)
+        | 'WriteUnparsedToGCS' >> fileio.WriteToFiles(output_path,
+                                                      shards=1,
+                                                      max_writers_per_bundle=0)
         )
 
     (rows.parsed_row
         | "WindowByMinute" >> beam.WindowInto(beam.window.FixedWindows(int(window_duration)),
-                                              # TODO: Set allowed lateness, trigger, and accumulation mode
-                                              )
+                                              trigger=AfterWatermark(late=AfterCount(1)),
+                                              allowed_lateness=int(allowed_lateness),
+                                              accumulation_mode=AccumulationMode.ACCUMULATING)
         | "CountPerMinute" >> beam.CombineGlobally(CountCombineFn()).without_defaults()
         | "AddWindowTimestamp" >> beam.ParDo(GetTimestampFn())
         | 'WriteAggToBQ' >> beam.io.WriteToBigQuery(
