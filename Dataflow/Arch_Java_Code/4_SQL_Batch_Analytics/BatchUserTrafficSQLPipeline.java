@@ -20,6 +20,8 @@ import com.google.gson.Gson;
 import org.apache.beam.runners.dataflow.options.DataflowPipelineOptions;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.PipelineResult;
+import org.apache.beam.sdk.extensions.sql.SqlTransform;
+import org.apache.beam.sdk.extensions.sql.impl.BeamSqlPipelineOptions;
 import org.apache.beam.sdk.io.TextIO;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
 import org.apache.beam.sdk.options.Description;
@@ -43,7 +45,7 @@ public class BatchUserTrafficSQLPipeline {
      * The {@link Options} class provides the custom execution options passed by the
      * executor at the command-line.
      */
-    public interface Options extends DataflowPipelineOptions {
+    public interface Options extends DataflowPipelineOptions, BeamSqlPipelineOptions {
         @Description("Path to events.json")
         String getInputPath();
         void setInputPath(String inputPath);
@@ -51,6 +53,10 @@ public class BatchUserTrafficSQLPipeline {
         @Description("BigQuery table name to write aggregations to")
         String getAggregateTableName();
         void setAggregateTableName(String aggregateTableName);
+
+        @Description("BigQuery table name to write raw data to")
+        String getRawTableName();
+        void setRawTableName(String rawTableName);
     }
 
     /**
@@ -107,20 +113,27 @@ public class BatchUserTrafficSQLPipeline {
          */
 
 
-        pipeline
+        PCollection<CommonLog> logs  = pipeline
                 // Read in lines from GCS and Parse to CommonLog
                 .apply("ReadFromGCS", TextIO.read().from(options.getInputPath()))
-                .apply("ParseJson", ParDo.of(new JsonToCommonLog()))
+                .apply("ParseJson", ParDo.of(new JsonToCommonLog()));
 
-                // TODO: Write SQL Transform
-
-                // Write to BQ
+        logs
+                // Apply a SqlTransform.query(QUERY_TEXT) to count page views and other aggregations
+                .apply("AggregateSQLQuery", SqlTransform.query("SELECT user_id," +
+                "COUNT(*) AS pageviews, SUM(num_bytes) as total_bytes, MAX(num_bytes) AS max_num_bytes, MIN" +
+                "(num_bytes) as min_num_bytes FROM PCOLLECTION GROUP BY user_id"))
                 .apply("WriteAggregateToBQ",
                         BigQueryIO.<Row>write().to(options.getAggregateTableName()).useBeamSchema()
                                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_TRUNCATE)
                                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED));
 
-                // TODO: Write branch for raw logs
+        logs
+                // Write the raw logs to BigQuery
+                .apply("WriteRawToBQ",
+                BigQueryIO.<CommonLog>write().to(options.getRawTableName()).useBeamSchema()
+                        .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_TRUNCATE)
+                        .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED));
 
         LOG.info("Building pipeline...");
 

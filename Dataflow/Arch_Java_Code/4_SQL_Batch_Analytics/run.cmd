@@ -23,3 +23,5 @@ cd $BASE_DIR
 gcloud services enable datacatalog.googleapis.com
 
 
+// 4) ownload the dependencies through maven
+mvn clean dependency:resolve
