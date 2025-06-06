@@ -12,4 +12,6 @@ Topics/Folders:
 
   2. Arch_Java_Code: all JAVA code archived
 
+  3. VertexAI: tasks about GCP VertexAI
+
 Note: just to prepare "Professional Data Engineer" certification exam
