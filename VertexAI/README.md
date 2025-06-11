@@ -9,3 +9,7 @@ Tasks/Labs:
 2. Configure AI Applications to Optimize Search Results (Challenge Lab):
   - Code file: GENAI091.ipynb
   - Lab link: https://partner.cloudskillsboost.google/paths/2302/course_templates/1250/labs/529942
+
+3. Getting Started with Google Generative AI Using the Gen AI SDK (GSP1209):
+  - Code file: GSP1209.ipynb
+  - Lab link: https://partner.cloudskillsboost.google/focuses/86494?parent=catalog&path=2294
