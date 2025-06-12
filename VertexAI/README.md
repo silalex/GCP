@@ -13,3 +13,7 @@ Tasks/Labs:
 3. Getting Started with Google Generative AI Using the Gen AI SDK (GSP1209):
   - Code file: GSP1209.ipynb
   - Lab link: https://partner.cloudskillsboost.google/focuses/86494?parent=catalog&path=2294
+
+4. Prompt Design Strategies:
+  - Code file: prompt-design-best-practices.ipynb
+  - Lab link: https://partner.cloudskillsboost.google/focuses/65985?parent=catalog&path=2294
