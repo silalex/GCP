@@ -21,3 +21,7 @@ Tasks/Labs:
 5. Getting Started with Google Search as a Tool with Gemini in Vertex AI:
   - Code file: GSP1264.ipynb (intro-grounding-gemini.ipynb)
   - Lab link: https://partner.cloudskillsboost.google/paths/2294/course_templates/1235/labs/527175
+
+6. Use function calling and grounding with Google Search to create a research tool:
+ - Code file: GENAI081.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2294/course_templates/1235/labs/527176
