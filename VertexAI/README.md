@@ -25,3 +25,7 @@ Tasks/Labs:
 6. Use function calling and grounding with Google Search to create a research tool:
  - Code file: GENAI081.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2294/course_templates/1235/labs/527176
+
+7. Code Execution with Gemini:
+ - Code file: code-execution.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2294/course_templates/1235/labs/527178
