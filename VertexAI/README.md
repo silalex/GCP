@@ -29,3 +29,7 @@ Tasks/Labs:
 7. Code Execution with Gemini:
  - Code file: code-execution.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2294/course_templates/1235/labs/527178
+
+8. Enhance Gemini with access to external services with function calling (Challenge Lab):
+ - Code file: GENAI067.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2294/course_templates/1299/labs/532460
