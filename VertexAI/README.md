@@ -33,3 +33,7 @@ Tasks/Labs:
 8. Enhance Gemini with access to external services with function calling (Challenge Lab):
  - Code file: GENAI067.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2294/course_templates/1299/labs/532460
+
+9. Build gen AI solutions using Model Garden models and APIs (Challenge Lab):
+ - Code file: GENAI094.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2308/course_templates/1310/labs/534118
