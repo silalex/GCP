@@ -45,3 +45,7 @@ Tasks/Labs:
 11. Use Reference Images to control image generation with Imagen (GENAI114):
  - Code file: imagen3_customization.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2309/course_templates/1321/labs/548241
+
+ 12. Edit images with Imagen (GENAI112):
+  - Code file: imagen3_editing.ipynb
+  - Lab link: https://partner.cloudskillsboost.google/paths/2309/course_templates/1321/labs/548244
