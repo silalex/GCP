@@ -49,3 +49,7 @@ Tasks/Labs:
  12. Edit images with Imagen (GENAI112):
   - Code file: imagen3_editing.ipynb
   - Lab link: https://partner.cloudskillsboost.google/paths/2309/course_templates/1321/labs/548244
+
+13. Generate video with Veo (GENAI119):
+ - Code file: veo-notebook.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2309/course_templates/1321/labs/548248
