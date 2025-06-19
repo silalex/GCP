@@ -38,6 +38,10 @@ Tasks/Labs:
  - Code file: GENAI094.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2308/course_templates/1310/labs/534118
 
-10. Generate images with Imagen:
+10. Generate images with Imagen (GENAI108):
  - Code file: Imagen3_start.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2309/course_templates/1321/labs/548240
+
+11. Use Reference Images to control image generation with Imagen (GENAI114):
+ - Code file: imagen3_customization.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2309/course_templates/1321/labs/548241
