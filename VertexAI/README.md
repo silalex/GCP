@@ -37,3 +37,7 @@ Tasks/Labs:
 9. Build gen AI solutions using Model Garden models and APIs (Challenge Lab):
  - Code file: GENAI094.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2308/course_templates/1310/labs/534118
+
+10. Generate images with Imagen:
+ - Code file: Imagen3_start.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2309/course_templates/1321/labs/548240
