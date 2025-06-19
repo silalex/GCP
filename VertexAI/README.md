@@ -53,3 +53,7 @@ Tasks/Labs:
 13. Generate video with Veo (GENAI119):
  - Code file: veo-notebook.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2309/course_templates/1321/labs/548248
+
+14. Edit images with Imagen: Challenge Lab (GENAI096):
+ - Code file: image-editing.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2309/course_templates/1292/labs/531996
