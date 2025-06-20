@@ -57,3 +57,7 @@ Tasks/Labs:
 14. Edit images with Imagen: Challenge Lab (GENAI096):
  - Code file: image-editing.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2309/course_templates/1292/labs/531996
+
+15. Document Question Answering with AI Applications Search and LangChain (n/a):
+ - Code file: LangChain-start.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2310/course_templates/1322/labs/550570
