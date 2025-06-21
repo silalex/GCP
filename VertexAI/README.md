@@ -61,3 +61,7 @@ Tasks/Labs:
 15. Document Question Answering with AI Applications Search and LangChain (n/a):
  - Code file: LangChain-start.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2310/course_templates/1322/labs/550570
+
+16. Leverage Firestore as a Vector Store (GENAI109):
+ - cymbal_ingest_database.ipynb
+ - https://partner.cloudskillsboost.google/paths/2310/course_templates/1322/labs/550578
