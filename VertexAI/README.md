@@ -69,3 +69,7 @@ Tasks/Labs:
 17. Build a DIY RAG Solution with Vertex AI APIs and LangChain (GENAI111):
  - rag.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2310/course_templates/1322/labs/550583
+
+ 18. Improving RAG Solutions:
+ - rag_improved.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2310/course_templates/1322/labs/550591
