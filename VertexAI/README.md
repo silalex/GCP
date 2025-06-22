@@ -73,3 +73,7 @@ Tasks/Labs:
  18. Improving RAG Solutions:
  - rag_improved.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2310/course_templates/1322/labs/550591
+
+19. Deploy a RAG application with vector search in Firestore: Challenge Lab (GENAI069):
+ - cymbal_ingest_to_vector_database.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2310/course_templates/1289/labs/531796
