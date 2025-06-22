@@ -64,4 +64,8 @@ Tasks/Labs:
 
 16. Leverage Firestore as a Vector Store (GENAI109):
  - cymbal_ingest_database.ipynb
- - https://partner.cloudskillsboost.google/paths/2310/course_templates/1322/labs/550578
+ - Lab link: https://partner.cloudskillsboost.google/paths/2310/course_templates/1322/labs/550578
+
+17. Build a DIY RAG Solution with Vertex AI APIs and LangChain (GENAI111):
+ - rag.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2310/course_templates/1322/labs/550583
