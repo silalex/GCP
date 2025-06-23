@@ -77,3 +77,7 @@ Tasks/Labs:
 19. Deploy a RAG application with vector search in Firestore: Challenge Lab (GENAI069):
  - cymbal_ingest_to_vector_database.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2310/course_templates/1289/labs/531796
+
+ 20. Measure Gen AI performance with the Generative AI Evaluation Service:
+ - cymbal-eval-notebook.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/focuses/98651
