@@ -85,3 +85,7 @@ Tasks/Labs:
 21. Evaluate ADK agent performance using the Vertex AI Generative AI Evaluation Service (GENAI110):
  - evaluating_adk_agent-v1.1.0.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2311/course_templates/1325/labs/541251
+
+22. Evaluate Gen AI Model and Agent Performance: Challenge Lab (GENAI098):
+ - cymbal-genai-model-service-evaluations.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2311/course_templates/1293/labs/531997
