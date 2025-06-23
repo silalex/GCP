@@ -78,6 +78,10 @@ Tasks/Labs:
  - cymbal_ingest_to_vector_database.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2310/course_templates/1289/labs/531796
 
- 20. Measure Gen AI performance with the Generative AI Evaluation Service:
+20. Measure Gen AI performance with the Generative AI Evaluation Service:
  - cymbal-eval-notebook.ipynb
- - Lab link: https://partner.cloudskillsboost.google/focuses/98651
+ - Lab link: https://partner.cloudskillsboost.google/focuses/98651?parent=catalog&path=2311
+
+21. Evaluate ADK agent performance using the Vertex AI Generative AI Evaluation Service (GENAI110):
+ - evaluating_adk_agent-v1.1.0.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2311/course_templates/1325/labs/541251
