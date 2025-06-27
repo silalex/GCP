@@ -91,5 +91,5 @@ Tasks/Labs:
  - Lab link: https://partner.cloudskillsboost.google/paths/2311/course_templates/1293/labs/531997
 
 23. Compare Model Performance using the Generative AI Evaluation Service: Challenge Lab (GENAI063) (out-of-the-scope):
- - cymbal-indie-film-planning.ipynb
+ - cymbal-indie-film-planning.ipynb & cymbal-indie-film.ipynb
  - Lab link: https://partner.cloudskillsboost.google/course_templates/1130/labs/528777
