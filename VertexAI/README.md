@@ -87,7 +87,7 @@ Tasks/Labs:
  - Lab link: https://partner.cloudskillsboost.google/paths/2311/course_templates/1325/labs/541251
 
 22. Evaluate Gen AI Model and Agent Performance: Challenge Lab (GENAI098):
- - cymbal-genai-model-service-evaluations.ipynb
+ - cymbal-genai-model-service-evaluations.ipynb & GENAI098_work_version.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/2311/course_templates/1293/labs/531997
 
 23. Compare Model Performance using the Generative AI Evaluation Service: Challenge Lab (GENAI063) (out-of-the-scope):
