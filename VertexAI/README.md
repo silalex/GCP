@@ -93,3 +93,7 @@ Tasks/Labs:
 23. Compare Model Performance using the Generative AI Evaluation Service: Challenge Lab (GENAI063) (out-of-the-scope):
  - cymbal-indie-film-planning.ipynb & cymbal-indie-film.ipynb
  - Lab link: https://partner.cloudskillsboost.google/course_templates/1130/labs/528777
+
+24. Implement Hybrid Search with Vertex AI Vector Search (GENAI115):
+ - hybrid.ipynb
+ - Lab link: https://partner.cloudskillsboost.google/paths/2310/course_templates/1358/labs/551078
