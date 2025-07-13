@@ -9,3 +9,7 @@
 3. Build Conversational Agents with the Python SDK:
  - GENAI113.ipynb
  - Lab link: https://partner.cloudskillsboost.google/paths/523/course_templates/1316/labs/548755
+
+4. Leverage best practices for building production-ready Conversational Agents: Challenge Lab (GENAI103):
+ - test_conversations.py
+ - Lab link: https://partner.cloudskillsboost.google/paths/523/course_templates/1288/labs/531795
