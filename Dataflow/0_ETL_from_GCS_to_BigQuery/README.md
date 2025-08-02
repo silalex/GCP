@@ -61,10 +61,10 @@ Note:
   --runner=DataflowRunner	# Tells Apache Beam to run the job on Google Cloud Dataflow, not locally
 
 Apache Beam is a unified programming model for batch and streaming data processing. You can run Beam pipelines on different runners, such as:
- - Google Cloud Dataflow (GCP)
+ - Google Cloud Dataflow (GCP): use "--runner=DataflowRunner" in the command line
  - Apache Flink
  - Apache Spark
- - DirectRunner (local testing)
+ - DirectRunner (local testing): use "--runner=DirectRunner" in the command line
 
 
 
