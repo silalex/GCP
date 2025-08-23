@@ -6,3 +6,12 @@ Labs:
   - file: GSP038.ipynb
 
 
+
+Essentials:
+
+ 2. Binary classification:
+    - theory: https://developers.google.com/machine-learning/crash-course/classification/programming-exercise
+    - link: https://colab.research.google.com/github/google/eng-edu/blob/main/ml/cc/exercises/binary_classification_rice.ipynb
+    - file: binary_classification_rice.ipynb
+
+
