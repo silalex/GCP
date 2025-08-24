@@ -5,7 +5,9 @@ Labs:
   - link: https://www.cloudskillsboost.google/paths/17/course_templates/593/labs/565174
   - file: GSP038.ipynb
 
-
+ 2. Exploratory Data Analysis using Bigquery and Workbench Instances
+  - lab link: https://partner.cloudskillsboost.google/paths/17/course_templates/923/labs/568864
+  - file: workbench_explore_data.ipynb
 
 Essentials:
 
