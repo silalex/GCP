@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: Appointment Scheduler API
+  description: API for retrieve available appointment time slots
+  version: 1.0.0
+servers:
+  - url: 'https://cymbal-availability-252090055581.us-east1.run.app'
+paths:
+  /:
+    post:
+      summary: get available appointment time slots by day
+      operationId: getAvailableSlots
+      requestBody:
+        description: Day to check for available slots
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentRequest'
+      responses:
+        '200':
+          description: Success operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentResponse'
+        '400':
+          description: Invalid input
+components:
+  schemas:
+    AppointmentRequest:
+      type: object
+      required:
+        - day
+      properties:
+        day:
+          type: string
+          description: Day of the week to check for availability
+    AppointmentResponse:
+      type: object
+      properties:
+        day:
+          type: string
+          description: Day of the week (capitalized)
+        available_slots:
+          type: array
+          items:
+            type: string
+          description: List of available time slots for the requested day (e.g., ["10:00 AM", "11:00 AM"])

@@ -13,3 +13,9 @@
 4. Leverage best practices for building production-ready Conversational Agents: Challenge Lab (GENAI103):
  - test_conversations.py
  - Lab link: https://partner.cloudskillsboost.google/paths/523/course_templates/1288/labs/531795
+
+ 5. Build Generative Agents with API Integrations: Challenge Lab (GENAI056):
+ - GENAI056.ipynb
+ - requirements.txt
+ - cymshops-integration-tool.yaml
+ - Lab link: https://partner.cloudskillsboost.google/paths/1777/course_templates/1064/labs/526302
